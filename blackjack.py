@@ -100,6 +100,9 @@ class BlackjackController:
             while not model.is_player_round_over:
                 model.update_points()
                 
+                if model.is_player_round_over:
+                    break
+                
                 view.display_double_down_reminder()
                 view.display_stats(model.turn, model.chips)
                 view.display_cards(model.player, "Player")
@@ -124,7 +127,7 @@ class BlackjackController:
                         raise ValueError
                     
                 view.wipe_console()
-                    
+                   
             while not model.is_dealer_round_over:
                 
                 model.dealer_hit()

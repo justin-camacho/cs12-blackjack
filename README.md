@@ -31,7 +31,7 @@ Play will begin from there and continue until either:
 
 ### Running the Game 🎮
 ```bash
-python3 whacamole.py
+python3 blackjack.py
 ```
 
 ### Running Pytest 🎬

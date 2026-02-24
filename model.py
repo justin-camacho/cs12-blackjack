@@ -113,7 +113,7 @@ class BlackjackModel:
         if self._raw_p_total > 21:
             temp = self._raw_p_total
             for card in self._player_card:
-                temp -= 10 if card.value == 'A' else 0  
+                temp -= 10 if card.value == 'A' and temp > 21 else 0  
             else:
                 self._player_total = temp
         else:

@@ -119,7 +119,7 @@ class BlackjackModel:
         else:
             self._player_total = self._raw_p_total
                 
-        if self._player_total > 21:
+        if self._player_total >= 21:
            self.stand()
                 
     def update_dealer_points(self) -> None:

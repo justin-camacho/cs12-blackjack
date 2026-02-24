@@ -82,7 +82,17 @@ class BlackjackController:
             view.wipe_console()
             model.start_turn()
             
-            if model.player_total == 21:
+            if model.player_total == 11 and model.player[-1].value in ('T', 'Q', 'J', 'K') \
+            or model.player_total == 10 and model.player[-1].value == 'A':
+                model.update_points()
+                
+                view.display_double_down_reminder()
+                view.display_stats(model.turn, model.chips)
+                view.display_cards(model.player, "Player")
+                view.display_cards(model.dealer, "Dealer")
+                view.display_points(model.player_total, model.dealer_total)
+                
+                time.sleep(4)
                 model.blackjack()
                 view.wipe_console()
                 continue

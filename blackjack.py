@@ -55,12 +55,16 @@ class BlackjackView:
     def display_points(self, pttl: int, dttl: int) -> None:
         print(f'Player: {pttl} <~> Dealer: {dttl}')
         print()
-        
-    def show_win_message(self, turn: int, chips: int) -> None:
-        print(f'You left the game after {turn} {"turn" if turn == 1 else "turns"} with {chips} {"chip" if chips == 1 else "chips"}!')
+     
+    def show_blackjack_message(self, bet: int) -> None:
+        print(f"You got blackjack and won {int((bet * 1.5) // 1)} chips!")
+        print()
         
     def show_lose_message(self) -> None:
         print("You went broke.")
+           
+    def show_win_message(self, turn: int, chips: int) -> None:
+        print(f'You left the game after {turn} {"turn" if turn == 1 else "turns"} with {chips} {"chip" if chips == 1 else "chips"}!')
     
     def wipe_console(self) -> None:
         for _ in range(50):
@@ -82,9 +86,7 @@ class BlackjackController:
             view.wipe_console()
             model.start_turn()
             
-            if model.player_total == 11 and model.player[-1].value in ('T', 'Q', 'J', 'K') \
-            or model.player_total == 10 and model.player[-1].value == 'A':
-                model.update_points()
+            if model.player_total == 21:
                 
                 view.display_double_down_reminder()
                 view.display_stats(model.turn, model.chips)
@@ -92,16 +94,13 @@ class BlackjackController:
                 view.display_cards(model.dealer, "Dealer")
                 view.display_points(model.player_total, model.dealer_total)
                 
-                time.sleep(4)
-                model.blackjack()
+                time.sleep(2)
                 view.wipe_console()
+                view.show_blackjack_message(model.bet)
+                model.blackjack_turn()
                 continue
             
             while not model.is_player_round_over:
-                model.update_points()
-                
-                if model.is_player_round_over:
-                    break
                 
                 view.display_double_down_reminder()
                 view.display_stats(model.turn, model.chips)
@@ -125,7 +124,9 @@ class BlackjackController:
                         sys.exit()
                     case _:
                         raise ValueError
-                    
+                
+                if not model.is_player_round_over:  
+                    model.update_points()
                 view.wipe_console()
                    
             while not model.is_dealer_round_over:
@@ -142,7 +143,7 @@ class BlackjackController:
                 
                 time.sleep(1)
             time.sleep(1)
-                
+            
             model.finish_turn()
             
         view.show_lose_message()

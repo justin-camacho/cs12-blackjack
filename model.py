@@ -138,6 +138,20 @@ class BlackjackModel:
                 
         if self._dealer_total > 16:
            self.dealer_stand()
+
+    def blackjack_turn(self) -> None:
+        self.blackjack()
+        
+        self._raw_p_total = 0
+        self._raw_d_total = 0
+        self._player_total = 0
+        self._dealer_total = 0
+        self._player_card = []
+        self._dealer_card = []
+        self._is_player_round_over = False
+        self._is_dealer_round_over = False
+        self._deck_idx = -1
+        self._turn += 1
         
     def start_turn(self) -> None:
         self._rng.shuffle(self.DECK)
@@ -147,6 +161,7 @@ class BlackjackModel:
         self.dealer_hit()
         self.update_dealer_points()
         self.hit()
+        self.update_points()
         
     def finish_turn(self) -> None:
         

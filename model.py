@@ -103,6 +103,7 @@ class BlackjackModel:
     def double(self) -> None:
         self._bet *= 2
         self._player_card.append(self.draw())
+        self.update_points()
         self._is_player_round_over = True
     
     def update_points(self) -> None:

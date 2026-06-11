@@ -1,0 +1,9 @@
+[project]
+name = "cs12-blackjack"
+version = "0.1.0"
+description = "Sample Blackjack game program, with unit tests, made as practice for CS12. Made by Justin Camacho."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyxel>=2.9.5",
+]

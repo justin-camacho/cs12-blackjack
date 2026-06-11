@@ -23,11 +23,11 @@ All players with blackjack are **guaranteed winners**.
 
 ### Program Mechanics 🛠️
 
-The player will be prompted to enter some number of **chips** (`>0`) and a **seed**.
+The player will be prompted to enter an integral **seed** and some number of **Players**. Each Player will be prompted to enter their **name** and **chips** (`>0`).
 Play will begin from there and continue until either:
 
-1. The player has **no chips**
-2. The player **exits** the game
+1. All players have **no chips** and been **eliminated**
+2. Some player **exits** the game
 
 ### Running the Game 🎮
 ```bash

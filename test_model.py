@@ -8,18 +8,13 @@ from time import sleep
 
 import pyxel # type: ignore
 
-from model.kit import ButtonType
-
 from view.component.button import Button
 from view.component.image import Image
 from view.component.text import Text
 
-def func() -> None:
-    print("work?")
-
-i: Image = Image(ButtonType.PAUSE)
+i: Image = Image("PAUSE")
 t: Text = Text("COOL")
-b: Button = Button(20, 20, func, i)
+b: Button = Button(20, 20, lambda: print("work?"), i)
 
 def update():
     b.update()

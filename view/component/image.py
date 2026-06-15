@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import pyxel  # type: ignore
 
-from model.kit import ButtonType, Color, Sprite
+from view.kit import Color, Sprite
 
 IMAGE_SPRITES: dict[str, Sprite] = \
     {
@@ -13,7 +13,7 @@ IMAGE_SPRITES: dict[str, Sprite] = \
  
 @dataclass(frozen=True)    
 class Image:
-    content: ButtonType
+    content: str
     
     @property
     def sprite(self) -> Sprite:
@@ -22,7 +22,8 @@ class Image:
         except KeyError:
             raise ValueError(f'Image content {self.content} is invalid.')
     
-    def __len__(self) -> int:
+    @property
+    def width(self) -> int:
         return self.sprite.w
     
     @property
@@ -30,7 +31,7 @@ class Image:
         return self.sprite.h
     
     def draw(self, x: int, y: int) -> None:
-        """ Write text using custom font sprites. """
+        """ Write images using custom sprites. """
         sprite: Sprite = self.sprite
             
         pyxel.blt(x, y, sprite.bank, sprite.u, sprite.v, sprite.w, sprite.h, sprite.bgcolor)  # type: ignore

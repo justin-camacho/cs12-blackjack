@@ -9,7 +9,7 @@ from typing import Callable
 
 import pyxel # type: ignore
 
-from model.kit import Color
+from view.kit import Color
 from view.component.image import Image
 from view.component.text import Text
 
@@ -23,7 +23,7 @@ class Button:
     
     def update(self) -> None:
         x, y = self.x, self.y
-        w, h = len(self.content), self.content.height
+        w, h = self.content.width, self.content.height
         
         pressed: bool = pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) # type: ignore
         within_x: bool = x <= pyxel.mouse_x <= x + w # type: ignore
@@ -34,7 +34,7 @@ class Button:
         
     def draw(self) -> None:
         x, y = self.x, self.y
-        w, h = len(self.content), self.content.height
+        w, h = self.content.width, self.content.height
         
         self.content.draw(x, y)
         
